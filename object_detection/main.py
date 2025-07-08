@@ -34,7 +34,7 @@ while True:
 
     cv2.imshow("YOLOv8", frame)
 
-    #q to exit
+    # Q to exit
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
