@@ -3,11 +3,14 @@
 This repository contains Python scripts using trained AI models to currently perform tasks such as:
 - Object/item counting
 - Video-based object detection
+- Speech-Recognition
 
 ## Files
-- `Item-count.py`: Counts the number of items using object detection.
-- `Video-detection.py`: Detects objects in video streams.
+- `object-counting`: Counts the number of items using object detection.
+- `object-detection`: Detects objects in video streams.
+- `Speech_Recognition`: Detects your voice and run command.
 
 ## Requirements
 - ultralytics
 - opencv-python
+- ... (Each folder has library requirements comments)
