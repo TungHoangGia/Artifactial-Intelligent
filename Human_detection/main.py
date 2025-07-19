@@ -3,24 +3,19 @@ import cv2
 import time
 
 # Load model, you can use your own model, just make sure to put it near the main.py
-model = YOLO('yolov8n.pt')
+model = YOLO('sigma.pt')
 
-# Open webcam
 cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Cannot open camera!")
     exit()
 
-# Set resolution 
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
-# Variables
-person_detected = None
+person_check = None
 danger_check = False
 danger_time = 0
-
-# Line position
 zone_y = 600  
 
 while True:
@@ -28,12 +23,11 @@ while True:
     if not ret:
         break
 
-    results = model(frame, verbose=False)
+    results = model(frame)
 
     check_line = False
     current_time = time.time()
 
-    # Danger line
     cv2.line(frame, (0, zone_y), (frame.shape[1], zone_y), (0, 0, 255), 3)
     cv2.putText(frame, "DANGER LINE", (10, zone_y - 10),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
@@ -52,18 +46,18 @@ while True:
                             cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
 
-    if person_detected is not None:
-        elapsed = current_time - person_detected
+    if person_check is not None:
+        elapsed = current_time - person_check
         cv2.putText(frame, f"Detected: {elapsed:.1f}s", (50, 60),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 0), 2)
 
     if check_line:
-        if person_detected is None:
-            person_detected = current_time
-        elif current_time - person_detected >= 0: # Set this bigger if you want it to wait atleast a customized amount of time
+        if person_check is None:
+            person_check = current_time
+        elif current_time - person_check >= 0: # Set this bigger if you want it to wait atleast a customized amount of time between messages;
             danger_check = True
     else:
-        person_detected = None
+        person_check = None
         danger_check = False
         danger_time = 0
 
