@@ -23,7 +23,7 @@ while True:
     if not ret:
         break
 
-    results = model(frame)
+    results = model(frame, verbose=False)
 
     check_line = False
     current_time = time.time()
