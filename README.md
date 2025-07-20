@@ -5,7 +5,7 @@ This repository contains Python scripts using trained AI models to currently per
 - Video-based object detection
 - Speech-Recognition
 - Human(Danger)-Detection
-- Human Fall Detection(Single) Python 3.10.0 recommended to use mediapipe
+- Human Fall Detection(High-Acc)
 
 ## Files
 - `object-counting`: Counts the number of items using object detection.
